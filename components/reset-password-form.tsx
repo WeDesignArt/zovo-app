@@ -11,23 +11,24 @@ export function ResetPasswordForm({
   return (
     <form className={cn("flex flex-col gap-6", className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Forgot password</h1>
+        <h1 className="text-2xl font-bold">Find Your Account</h1>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Label htmlFor="email"></Label>
+          <Input id="email" type="email" placeholder="Enter Email Address" className="rounded-2xl" required />
         </div>
 
-        <Button asChild className="w-full bg-primary-hex">
-          <Link href="/dashboard">Login</Link>
+        <Button className="bg-[#E1FF00] rounded-4xl" type="submit">
+          <Link href="/otp"></Link>
+          Submit
         </Button>
       </div>
 
-      <div className="text-center text-sm ">
-        Back to{" "}
+      <div className="text-center text-white opacity-75 text-sm ">
+        Already have an{" "}
         <a href="/login" className="underline underline-offset-4">
-          Login
+          account?
         </a>
       </div>
     </form>

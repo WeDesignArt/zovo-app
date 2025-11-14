@@ -18,36 +18,36 @@ export function SignupForm({
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
-          <Label htmlFor="fullName">Full Name</Label>
-          <Input id="fullName" type="text" placeholder="Jhon Wick" required />
+          <Label htmlFor="fullName"></Label>
+          <Input id="fullName" type="text" className="rounded-2xl" placeholder="Full Name" required />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Label htmlFor="email"></Label>
+          <Input id="email" type="email" className="rounded-2xl" placeholder="Enter Email Address" required />
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="phone">Phone</Label>
-          <Input id="phone" type="text" placeholder="123647987" required />
+          <Label htmlFor="phone"></Label>
+          <Input id="phone" type="text" className=" rounded-2xl" placeholder="Enter Phone Number" required />
         </div>
 
         <div className="grid gap-2">
           <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password"></Label>
           </div>
-          <Input id="password" type="password" required />
+          <Input id="password" type="password" placeholder="Enter Password" className=" rounded-2xl" required />
         </div>
 
-        <Button asChild className="w-full bg-primary-hex">
+        <Button asChild className="bg-[#E1FF00] rounded-4xl">
           <Link href="/dashboard">Submit</Link>
         </Button>
       </div>
 
-      <div className="text-center text-sm ">
-        Back to{" "}
+      <div className="text-center text-white opacity-75 text-sm ">
+        Already have an{" "}
         <a href="/login" className="underline underline-offset-4">
-          Login
+          account?
         </a>
       </div>
     </form>
