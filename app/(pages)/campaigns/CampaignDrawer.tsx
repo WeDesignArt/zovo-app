@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { CalendarIcon, Plus, Trash2, X } from "lucide-react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
+
 import {
   Sheet,
   SheetClose,
@@ -51,11 +52,11 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
-export function CampaignDrawer() {
-  const form = useForm<CampaignFormValues>({
-    resolver: zodResolver(CampaignFormSchema),
-    defaultValues: defaultCampaignValues
-  });
+  function CampaignDrawer() {
+    const form = useForm<CampaignFormValues>({
+      resolver: zodResolver(CampaignFormSchema) as Resolver<CampaignFormValues>,
+      defaultValues: defaultCampaignValues
+    });
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -107,7 +108,7 @@ export function CampaignDrawer() {
         </Button>
       </SheetTrigger>
 
-      <SheetContent className="!w-full lg:!max-w-[70%]">
+      <SheetContent className="w-full lg:max-w-[70%]">
         <SheetHeader>
           <SheetTitle>Create New Campaign</SheetTitle>
           <SheetDescription>
@@ -573,7 +574,7 @@ export function CampaignDrawer() {
                               onCheckedChange={field.onChange}
                             />
                           </FormControl>
-                          <FormLabel className="!mt-0">
+                          <FormLabel className="mt-0!">
                             Require Analytics Screenshots
                           </FormLabel>
                         </FormItem>
@@ -590,7 +591,7 @@ export function CampaignDrawer() {
                               onCheckedChange={field.onChange}
                             />
                           </FormControl>
-                          <FormLabel className="!mt-0">
+                          <FormLabel className="mt-0!">
                             Require Insights Access
                           </FormLabel>
                         </FormItem>
@@ -697,7 +698,7 @@ export function CampaignDrawer() {
                                           );
                                     }}
                                   />
-                                  <FormLabel className="!mt-0">
+                                  <FormLabel className="mt-0!">
                                     {platform}
                                   </FormLabel>
                                 </FormItem>
@@ -756,7 +757,7 @@ export function CampaignDrawer() {
                                           );
                                     }}
                                   />
-                                  <FormLabel className="!mt-0">
+                                  <FormLabel className="mt-0!">
                                     {type}
                                   </FormLabel>
                                 </FormItem>

@@ -34,7 +34,7 @@ export default function AdminPanelLayout({
         {isLoading && <Preloader />}
         <main
           className={cn(
-            `min-h-[calc(100vh_-_52px)] pt-4 shadow-md shadow-black/5 dark:border-muted-background dark:bg-dashboard-background bg-muted border-r dark:border transition-[margin-left] ease-in-out duration-300 rounded-2xl ${
+            `min-h-[calc(100vh-52px)] pt-4 shadow-md shadow-black/5 dark:border-muted-background dark:bg-dashboard-background bg-muted border-r dark:border transition-[margin-left] ease-in-out duration-300 rounded-2xl ${
               isLoading ? "blur-sm pointer-events-none" : ""
             }`,
             !settings.disabled &&

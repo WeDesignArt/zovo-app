@@ -25,7 +25,7 @@ export function Menu({ isOpen }: MenuProps) {
   const menuList = getMenuList(pathname);
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block">
+    <ScrollArea className="[&>div>div[style]]:block!">
       <nav className="mt-4 h-[full] w-full">
         <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
           {menuList.map(({ groupLabel, menus }, index) => (
@@ -69,7 +69,7 @@ export function Menu({ isOpen }: MenuProps) {
                                   ? "secondary"
                                   : "ghost"
                               }
-                              className={`w-full justify-start h-10 mb-1 hover:bg-muted-foreground/10 hover:text-foreground text-muted-foreground ${
+                              className={`w-full rounded-4xl justify-start h-10 mb-1 hover:bg-muted-foreground/10 hover:text-foreground text-muted-foreground ${
                                 (active === undefined &&
                                   pathname.startsWith(href)) ||
                                 active

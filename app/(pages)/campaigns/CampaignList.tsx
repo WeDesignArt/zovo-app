@@ -80,7 +80,7 @@ export function CampaignList({ data }: CampaignListProps) {
                   <h3 className="font-semibold text-lg">{campaign.name}</h3>{" "}
                   <Badge
                     variant="outline"
-                    className={cn`ml-2 text-white px-3 mt-1 py-0 leading-[0] font-normal h-5 hidden md:inline-flex text-[10px] ${
+                    className={cn`ml-2 text-white px-3 mt-1 py-0 leading-0 font-normal h-5 hidden md:inline-flex text-[10px] ${
                       categoryConfig[
                         campaign.category as keyof typeof categoryConfig
                       ]
@@ -124,7 +124,7 @@ export function CampaignList({ data }: CampaignListProps) {
                   {campaign.team.map((member, i) => (
                     <Tooltip key={i}>
                       <TooltipTrigger asChild>
-                        <Avatar className="border-2 border-background w-8 h-8 hover:translate-y-[-8px] transition-transform duration-500">
+                        <Avatar className="border-2 border-background w-8 h-8 hover:-translate-y-2 transition-transform duration-500">
                           <AvatarImage src={member.avatar} alt={member.name} />
                           <AvatarFallback>{member.initials}</AvatarFallback>
                         </Avatar>
@@ -219,7 +219,7 @@ export function CampaignList({ data }: CampaignListProps) {
 
       {hasMore && (
         <div className="text-center mt-4">
-          <Button onClick={loadMore} variant="outline">
+          <Button onClick={loadMore} variant="outline" className="rounded-xl">
             Load More
           </Button>
         </div>

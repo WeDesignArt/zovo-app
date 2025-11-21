@@ -1,5 +1,4 @@
 import { Button, buttonVariants } from "@/components/ui/button";
-import type { CalendarProps } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
@@ -12,9 +11,10 @@ import { type Locale, enUS } from "date-fns/locale";
 import {
   Calendar as CalendarIcon,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Clock
 } from "lucide-react";
-import { Clock } from "lucide-react";
+
 import * as React from "react";
 import { useImperativeHandle, useRef } from "react";
 
@@ -25,7 +25,13 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+
 import { CaptionProps, DayPicker } from "react-day-picker";
+
+// ❌ WRONG: import type { CalendarProps } from "@/components/ui/calendar";
+// ✅ RIGHT:
+type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
 
 // ---------- utils start ----------
 /**
@@ -292,7 +298,7 @@ function Calendar({
     return false;
   };
 
-  return (
+    return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
@@ -332,10 +338,18 @@ function Calendar({
         day_hidden: "invisible",
         ...classNames
       }}
-      components={{
+      components={({
         IconLeft: () => <ChevronLeft className="h-4 w-4" />,
         IconRight: () => <ChevronRight className="h-4 w-4" />,
-        Caption: ({ displayMonth }: CaptionProps) => {
+        Caption: (capProps: any) => {
+          // Support both legacy ({ displayMonth }) and newer DayPicker ({ calendarMonth }) shapes.
+          // calendarMonth may be an object with a `date` field or directly a Date depending on DayPicker version.
+          const displayMonth: Date =
+            capProps?.displayMonth ??
+            capProps?.calendarMonth?.date ??
+            capProps?.calendarMonth ??
+            new Date();
+
           return (
             <div className="inline-flex gap-2">
               <Select
@@ -382,7 +396,7 @@ function Calendar({
             </div>
           );
         }
-      }}
+      } as any)}
       {...props}
     />
   );
@@ -553,7 +567,7 @@ const TimePickerInput = React.forwardRef<
         id={id || picker}
         name={name || picker}
         className={cn(
-          "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+          "w-12 text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
           className
         )}
         value={value || calculatedValue}
@@ -846,7 +860,7 @@ const DateTimePicker = React.forwardRef<
             mode="single"
             selected={displayDate}
             month={month}
-            onSelect={(newDate) => {
+            onSelect={(newDate?: Date) => {
               if (newDate) {
                 newDate.setHours(
                   month?.getHours() ?? 0,
